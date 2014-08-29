@@ -1,0 +1,11 @@
+rabbitmqds:
+  image: tianon/true
+  volumes:
+    - volumes/log:/var/log/rabbitmq
+    - volumes/lib:/var/lib/rabbitmq
+rabbitmq:
+  build: .
+  ports:
+    - "5672:5672"
+  volumes_from:
+    - rabbitmqds

@@ -1,0 +1,3 @@
+export LC_ALL=C
+export DEBIAN_FRONTEND=noninteractive
+min_apt_install='apt-get install -yq --no-install-recommends'
