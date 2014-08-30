@@ -1,8 +1,8 @@
-# RabbitMQ [![Docker.io Hub](http://img.shields.io/badge/docker.io%20hub-logicalparadox%2Frabbitmq-blue.svg?style=flat-square)](https://registry.hub.docker.com/u/logicalparadox/rabbitmq/)
+# RabbitMQ 
 
 > [RabbitMQ](http://www.rabbitmq.com/) for Docker.io
 
-    docker pull logicalparadox/rabbitmq
+[![Docker.io Hub](http://img.shields.io/badge/docker.io-logicalparadox%2Frabbitmq-blue.svg?style=flat-square)](https://registry.hub.docker.com/u/logicalparadox/rabbitmq/)
 
 ### Volumes
 
