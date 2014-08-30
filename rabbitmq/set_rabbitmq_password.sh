@@ -1,5 +1,16 @@
 #!/bin/bash
 
+if [ -v RABBITMQ_UNSECURE ]; then
+  echo "RabbitMQ will run in unsecure mode."
+  touch /.rabbitmq_password_set
+  cat > /etc/rabbitmq/rabbitmq.config <<EOF
+[
+  {rabbit, [{loopback_users, []}]}
+].
+EOF
+  exit 0
+fi
+
 if [ -f /.rabbitmq_password_set ]; then
   echo "RabbitMQ password already set!"
   exit 0
