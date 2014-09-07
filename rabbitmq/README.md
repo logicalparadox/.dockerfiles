@@ -10,19 +10,21 @@ quick spin up of an unsecure instance for development use.
 
 ### Production Usage
 
-    docker run -d logicalparadox/rabbitmq \
+    docker run -d \
       -p 5672:5672 \
       -p 15672:15672 \
       -v volumes/lib:/volumes/lib/rabbitmq \
       -v volumes/log:/volumes/log/rabbitmq \
       -e RABBITMQ_HOSTNAME="bunny.mydomain.com" \
-      -e RABBITMQ_PASS="$upers3cret"
+      -e RABBITMQ_PASS="$upers3cret" \
+      logicalparadox/rabbitmq
 
 ### Development Usage
 
-    docker run -d logicalparadox/rabbitmq \
+    docker run -d \
       -p 5672:5672 \
-      -e RABBITMQ_UNSECURE=1
+      -e RABBITMQ_UNSECURE=1 \
+      logicalparadox/rabbitmq
 
 ## Configuration
 

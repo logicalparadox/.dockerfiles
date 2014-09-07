@@ -2,12 +2,12 @@
 
 if [ -v RABBITMQ_UNSECURE ]; then
   echo "RabbitMQ will run in unsecure mode."
-  touch /.rabbitmq_password_set
   cat > /etc/rabbitmq/rabbitmq.config <<EOF
 [
   {rabbit, [{loopback_users, []}]}
 ].
 EOF
+  touch /.rabbitmq_password_set
   exit 0
 fi
 
@@ -31,9 +31,6 @@ echo "=> Done!"
 touch /.rabbitmq_password_set
 
 echo "========================================================================"
-echo "You can now connect to this RabbitMQ server using, for example:"
-echo ""
-echo "    rabbitmqadmin -u $USER -p $PASS -H <host> -P <port> list vhosts"
-echo ""
-echo "Please remember to change the above password as soon as possible!"
+echo "RabbitMQ User: $USER
+echo "RabbitMQ Password: $PASS
 echo "========================================================================"
