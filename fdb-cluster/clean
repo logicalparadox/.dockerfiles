@@ -1,0 +1,6 @@
+#!/bin/bash
+
+START_DIR="$( cd "$( dirname "$0" )" && pwd )"
+
+rm -rf $START_DIR/foundationdb/etc/*
+rm -rf $START_DIR/foundationdb/data/*

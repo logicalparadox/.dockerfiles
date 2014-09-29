@@ -1,0 +1,10 @@
+#!/bin/bash
+
+START_DIR="$( cd "$( dirname "$0" )" && pwd )"
+source $START_DIR/env
+
+COORDNAME="${PROJECT_NAME}_fdbserver_1"
+
+docker run --rm -it \
+ --volumes-from $COORDNAME \
+ logicalparadox/fdbcli $@

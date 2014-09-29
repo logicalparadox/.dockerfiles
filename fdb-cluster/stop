@@ -1,0 +1,22 @@
+#!/bin/bash
+
+START_DIR="$( cd "$( dirname "$0" )" && pwd )"
+source $START_DIR/env
+
+echo "=> stopping"
+for (( c=1; c<=$CLUSTER_SIZE; c++ ))
+do
+  CNAME="${PROJECT_NAME}_fdbserver_${c}"
+  printf "   %s: " ${CNAME}
+  C1=$(docker stop $CNAME)
+  printf "done\n"
+done
+
+echo "=> removing containers"
+for (( c=1; c<=$CLUSTER_SIZE; c++ ))
+do
+  CNAME="${PROJECT_NAME}_fdbserver_${c}"
+  printf "   %s: " ${CNAME}
+  C1=$(docker rm $CNAME)
+  printf "done\n"
+done

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+START_DIR="$( cd "$( dirname "$0" )" && pwd )"
+source $START_DIR/env
+
+echo "=> starting"
+
+COORDNAME="${PROJECT_NAME}_fdbserver_1"
+printf "   %s: " ${COORDNAME}
+C1=$(docker run -d \
+  --name $COORDNAME \
+  -p 4500 \
+  -v $START_DIR/foundationdb/etc:/etc/foundationdb \
+  -v $START_DIR/foundationdb/data:/fdb-data \
+  logicalparadox/foundationdb)
+printf "%s (as coord)\n" "${C1:0:8}"
+
+sleep 5
+
+for (( c=2; c<=$CLUSTER_SIZE; c++ ))
+do
+  CNAME="${PROJECT_NAME}_fdbserver_${c}"
+  printf "   %s: " ${CNAME}
+  C1=$(docker run -d \
+    --name $CNAME \
+    -p 4500 \
+    --volumes-from $COORDNAME \
+    logicalparadox/foundationdb)
+  printf "%s\n" "${C1:0:8}"
+done

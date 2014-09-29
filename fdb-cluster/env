@@ -1,0 +1,4 @@
+#!/bin/bash
+
+export PROJECT_NAME="clustertest"
+export CLUSTER_SIZE=3
