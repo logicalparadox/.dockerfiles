@@ -3,42 +3,45 @@ set -e
 source /build/build-config
 set -x
 
-## Temporarily disable dpkg fsync to make building faster.
+# Temporarily disable dpkg fsync to make building faster.
 echo force-unsafe-io > /etc/dpkg/dpkg.cfg.d/02apt-speedup
 
-## Prevent initramfs updates from trying to run grub and lilo.
-## https://journal.paul.querna.org/articles/2013/10/15/docker-ubuntu-on-rackspace/
-## http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=594189
+# Prevent initramfs updates from trying to run grub and lilo.
+# https://journal.paul.querna.org/articles/2013/10/15/docker-ubuntu-on-rackspace/
+# http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=594189
 export INITRD=no
 mkdir -p /etc/container_environment
 echo -n no > /etc/container_environment/INITRD
 
-## Enable Ubuntu Universe and Multiverse.
+# Enable Ubuntu Universe and Multiverse.
 sed -i 's/^#\s*\(deb.*universe\)$/\1/g' /etc/apt/sources.list
 sed -i 's/^#\s*\(deb.*multiverse\)$/\1/g' /etc/apt/sources.list
 apt-get -q update
 
-## Fix some issues with APT packages.
-## See https://github.com/dotcloud/docker/issues/1024
+# Fix some issues with APT packages.
+# See https://github.com/dotcloud/docker/issues/1024
 dpkg-divert --local --rename --add /sbin/initctl
 ln -sf /bin/true /sbin/initctl
 
-## Replace the 'ischroot' tool to make it always return true.
-## Prevent initscripts updates from breaking /dev/shm.
-## https://journal.paul.querna.org/articles/2013/10/15/docker-ubuntu-on-rackspace/
-## https://bugs.launchpad.net/launchpad/+bug/974584
+# Replace the 'ischroot' tool to make it always return true.
+# Prevent initscripts updates from breaking /dev/shm.
+# https://journal.paul.querna.org/articles/2013/10/15/docker-ubuntu-on-rackspace/
+# https://bugs.launchpad.net/launchpad/+bug/974584
 dpkg-divert --local --rename --add /usr/bin/ischroot
 ln -sf /bin/true /usr/bin/ischroot
 
-## Install HTTPS support for APT.
+# Install HTTPS support for APT.
 $min_apt_install apt-transport-https ca-certificates
 
-## Install add-apt-repository
+# Install add-apt-repository
 $min_apt_install software-properties-common
 
-## Upgrade all packages.
+# Install curl
+$min_apt_install curl
+
+# Upgrade all packages.
 apt-get dist-upgrade -qy --no-install-recommends
 
-## Fix locale.
+# Fix locale.
 $min_apt_install language-pack-en
 locale-gen en_US

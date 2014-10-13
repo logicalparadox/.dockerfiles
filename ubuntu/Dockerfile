@@ -12,5 +12,9 @@ ADD ./build /build
 RUN /build/bootstrap.sh && \
     /build/clean.sh
 
+# Always update first
+ONBUILD RUN apt-get -q update
+ONBUILD RUN apt-get -qy upgrade
+
 # Insert bashrc
 ADD bashrc /root/.bashrc

@@ -2,9 +2,6 @@ FROM logicalparadox/ubuntu:14.04
 MAINTAINER Jake Luer "jake@alogicalparadox.com"
 
 # Install script dependencies
-ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get -qq update
-RUN apt-get -qy upgrade 
 RUN apt-get -qy install erlang-nox pwgen
 
 # Install and configure
