@@ -2,8 +2,6 @@ FROM logicalparadox/ubuntu:14.04
 MAINTAINER Jake Luer "jake@alogicalparadox.com"
 
 # upgrade
-RUN apt-get -q update
-RUN apt-get -qy upgrade
 RUN apt-get -qy install python-setuptools
 
 # Prevent initialization by installer

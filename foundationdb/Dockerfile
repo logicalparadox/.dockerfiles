@@ -2,9 +2,11 @@ FROM logicalparadox/supervisor
 MAINTAINER Jake Luer "jake@alogicalparadox.com"
 
 # upgrade
-RUN apt-get -q update
-RUN apt-get -qy upgrade
 RUN apt-get -qy install python-setuptools
+
+#
+# FoundationDB
+#
 
 # Prevent initialization by installer
 RUN mkdir /etc/foundationdb
@@ -28,6 +30,11 @@ ADD foundationdb.sv.conf /etc/supervisor/conf.d/foundationdb.sv.conf
 # Reset config for volume
 RUN mv /etc/foundationdb/foundationdb.conf /usr/lib/foundationdb/foundationdb.conf.orig
 RUN rm -rf /etc/foundationdb /var/lib/foundationdb/data
+
+# Cleanup install files
+RUN rm -f /tmp/*
+
+# Volumes
 VOLUME ["/etc/foundationdb", "/fdb-data"]
 
 # Expose Service
