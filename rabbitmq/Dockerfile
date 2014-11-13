@@ -4,9 +4,11 @@ MAINTAINER Jake Luer "jake@alogicalparadox.com"
 # Install script dependencies
 RUN apt-get -qy install erlang-nox pwgen
 
+ENV RABBITMQ_VERSION 3.4.1
+
 # Install and configure
-ADD https://www.rabbitmq.com/releases/rabbitmq-server/v3.3.5/rabbitmq-server_3.3.5-1_all.deb /tmp/
-RUN dpkg -i /tmp/rabbitmq-server_3.3.5-1_all.deb
+ADD https://www.rabbitmq.com/releases/rabbitmq-server/v$RABBITMQ_VERSION/rabbitmq-server_$RABBITMQ_VERSION-1_all.deb /tmp/
+RUN dpkg -i /tmp/rabbitmq-server_$RABBITMQ_VERSION-1_all.deb
 RUN /usr/sbin/rabbitmq-plugins enable rabbitmq_management
 
 # RabbitMQ Scripts
