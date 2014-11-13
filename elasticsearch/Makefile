@@ -1,12 +1,12 @@
 DOCKER_ACCOUNT=logicalparadox
 
-UNSTABLE_VERSION=1.4.0-BETA1
+STABLE_VERSION=1.4.0
 
 all: build push
 
 build:
-	docker build -t ${DOCKER_ACCOUNT}/elasticsearch:unstable ./unstable/
-	docker tag ${DOCKER_ACCOUNT}/elasticsearch:unstable ${DOCKER_ACCOUNT}/elasticsearch:${UNSTABLE_VERSION}
+	docker build -t ${DOCKER_ACCOUNT}/elasticsearch ./stable/
+	docker tag ${DOCKER_ACCOUNT}/elasticsearch ${DOCKER_ACCOUNT}/elasticsearch:${STABLE_VERSION}
 
 push:
 	docker push ${DOCKER_ACCOUNT}/elasticsearch
