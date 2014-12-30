@@ -1,6 +1,6 @@
 DOCKER_ACCOUNT=logicalparadox
 
-AMQP_VERSION=3.4.1
+AMQP_VERSION=3.4.2
 
 all: build push
 

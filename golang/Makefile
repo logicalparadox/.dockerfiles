@@ -1,6 +1,6 @@
 DOCKER_ACCOUNT=logicalparadox
 
-GOLANG_VERSION=1.3.3
+GOLANG_VERSION=1.4
 
 all: build push
 

@@ -3,7 +3,7 @@ MAINTAINER Jake Luer "jake@alogicalparadox.com"
 
 RUN apt-get install -yq git
 
-ENV GOLANG_VERSION 1.3.3
+ENV GOLANG_VERSION 1.4
 ENV GPM_VERSION 1.3.1
 
 RUN \
