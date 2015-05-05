@@ -1,6 +1,6 @@
 DOCKER_ACCOUNT=logicalparadox
 
-STABLE_VERSION=1.4.0
+STABLE_VERSION=1.5.2
 
 all: build push
 
